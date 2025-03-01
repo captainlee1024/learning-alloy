@@ -1,0 +1,20 @@
+cargo run --bin subscribe_blocks
+   Compiling subscriptions v0.1.0 ()
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.28s
+     Running `target/debug/subscribe_blocks`
+通过websocket 订阅，实现获取最新区块, 这里展示订阅5个区块后退出
+WebSocket start
+subscribe new block header: block number: 21951850, block hash: 0xa72cd26602d8e2c082f6ee43b4e56c41fbfa3848af6bc7042b1702a45b33aef9
+subscribe new block header: block number: 21951851, block hash: 0x8a3f211a6c3622177c4b2b54acc333670159dfc4917cb5edd1aa8f392fbd5d97
+subscribe new block header: block number: 21951852, block hash: 0xc3069b8be06ae911e94687e49d2f082554227e1cd5e9989ea09d18abc5ddbed4
+subscribe new block header: block number: 21951853, block hash: 0x715bb4db982824a40d54070d4fc37e563c7daac807b17b38a3e75998807a9a46
+subscribe new block header: block number: 21951854, block hash: 0x110bfa5fefd10a4fb9322f9845d98c38634bad25c63d882442d7173072ac7875
+WebSocket end
+通过http 轮训，实现获取最新区块, 这里展示轮训到5个区块后退出
+http poller start
+polling new block: block number: 21951855, block hash: 0x3c83f43643b1dc3c328b6d052a87da970c15bd47e9617a82f9b1fc0b5ebe3e4f
+polling new block: block number: 21951856, block hash: 0x4e196539dd044e0ceec90e43a5a2eb601b544a01eb2bccf55d8ee3a693793ec1
+polling new block: block number: 21951857, block hash: 0x23cab685dd2036dde12dd70cbb6bf5c2fdc5c2ec2a4fe36f98dd6b614dbe3a43
+polling new block: block number: 21951858, block hash: 0xa1c9dfc56ade198eb6ed270e8161a4581e97f8bee4a8c8d6959472c117c15314
+polling new block: block number: 21951859, block hash: 0xb9758cfead5269d020c8821bd5a5206dd12f7578034591cf4b6931bc641f0f38
+http poller end
