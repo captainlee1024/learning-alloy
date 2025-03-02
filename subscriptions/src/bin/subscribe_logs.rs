@@ -1,15 +1,19 @@
 #![feature(slice_pattern)]
 
-use core::slice::SlicePattern;
-
 use alloy::{
-    primitives::{U256, address},
+    primitives::address,
     providers::{Provider, ProviderBuilder, WsConnect},
     rpc::types::{BlockNumberOrTag, Filter},
+    sol,
+    sol_types::SolEvent,
     transports::http::reqwest::Url,
 };
 use eyre::Result;
 use futures_util::stream::{self, StreamExt};
+
+sol! {
+    event Transfer(address indexed from, address indexed to, uint256 amount);
+}
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -32,20 +36,33 @@ async fn main() -> Result<()> {
     );
     println!("websocket subscribe USDT Transfer Event start");
     while let Some(log) = sub_stream.next().await {
-        // let value = U256::from_be_slice(log.data().data.as_slice());
-        let data = log.data().data.as_slice(); // 获取 &[u8]
-        let data_bytes: [u8; 32] = data.try_into().expect("Data must be 32 bytes");
-        let value = U256::from_be_bytes(data_bytes);
+        // println!("address: {:?}", log.topics()[0]);
+        // topics0 不是合约地址，是event 签名
+        println!("log event signathre: {:?}", log.topics()[0]);
+        println!("sol gen signature hash: {}", Transfer::SIGNATURE_HASH);
 
-        println!("address: {:?}", log.topics()[0]);
+        // let value = U256::from_be_slice(log.data().data.as_slice());
+        // 手动解析
+        // let data = log.data().data.as_slice(); // 获取 &[u8]
+        // let data_bytes: [u8; 32] = data.try_into().expect("Data must be 32 bytes");
+        // let value = U256::from_be_bytes(data_bytes);
+        //
+        // println!(
+        //     "手动解析数据 --> 在 block {:?} Tx {:?} 中 {:?} 转账 {:?} USDT 到 {:?}",
+        //     log.block_number,
+        //     log.transaction_hash,
+        //     log.topics()[1], // topics()[1]是地址补0之后的数据，下面通过sol
+        //     // 生成结构体之后解析出的数据是真正的地址
+        //     value,
+        //     log.topics()[2]
+        // );
+
+        // 使用sol 去生成对应的合约数据类型，方便查询后的数据解码到对应的数据类型
+        let Transfer { from, to, amount } = log.log_decode()?.inner.data;
         println!(
-            "在 block {:?} Tx {:?} 中 {:?} 转账 {:?} USDT 到 {:?}",
-            log.block_number,
-            log.transaction_hash,
-            log.topics()[1],
-            value,
-            log.topics()[2]
-        );
+            "使用sol生成中间数据类型自动解析数据 --> 在 block {:?} Tx {:?} 中 {from} 转账给 {to} {amount} USDT",
+            log.block_number, log.transaction_hash
+        )
     }
     println!("websocket subscribe USDT Transfer Event end");
     println!();
@@ -63,19 +80,26 @@ async fn main() -> Result<()> {
     println!("http polling USDT Transfer Event start");
     while let Some(log) = stream.next().await {
         // let value = U256::from_be_slice(log.data().data.as_slice());
+        //
+        //       let data = log.data().data.as_slice(); // 获取 &[u8]
+        //       let data_bytes: [u8; 32] = data.try_into().expect("Data must be 32 bytes");
+        //       let value = U256::from_be_bytes(data_bytes);
+        //
+        //       println!("address: {:?}", log.topics()[0]);
+        //       println!(
+        //           "在 block {:?} Tx {:?} 中 {:?} 转账 {:?} USDT 到 {:?}",
+        //           log.block_number,
+        //           log.transaction_hash,
+        //           log.topics()[1],
+        //           value,
+        //           log.topics()[2]
+        //       );
 
-        let data = log.data().data.as_slice(); // 获取 &[u8]
-        let data_bytes: [u8; 32] = data.try_into().expect("Data must be 32 bytes");
-        let value = U256::from_be_bytes(data_bytes);
-
-        println!("address: {:?}", log.topics()[0]);
+        // 使用sol生成合约交互中对应到rust的数据类型
+        let Transfer { from, to, amount } = log.log_decode()?.inner.data;
         println!(
-            "在 block {:?} Tx {:?} 中 {:?} 转账 {:?} USDT 到 {:?}",
-            log.block_number,
-            log.transaction_hash,
-            log.topics()[1],
-            value,
-            log.topics()[2]
+            "block {:?} tx {:?} {from} transfer {to} {amount} USDT",
+            log.block_number, log.transaction_hash
         );
     }
     println!("http polling USDT Transfer Event end");
