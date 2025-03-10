@@ -72,8 +72,12 @@ async fn main() -> Result<()> {
     let http_url = Url::try_from(http_url_str)?;
     let http_provider = ProviderBuilder::new().on_http(http_url);
 
+    // watch_logs 实际是轮训 eth_getFilterChanges, 每次查询返回自上次查询后新增的logs
+    // logs_poller 是一个轮训器, into_stream的到Stream<Item = Vec<Log>>
+    // flat_map 是将每个Vec<Log> 转换为 Stream<Item = Log> 并展平
     let logs_poller = http_provider.watch_logs(&filter).await?;
     let mut stream = logs_poller.into_stream().flat_map(stream::iter).take(40);
+    // let mut stream = logs_poller.into_stream();
     println!(
         "使用 http poll 的方式订阅新区块的logs, 并通过filter 过滤，这里获取20event后退出进行演示"
     );

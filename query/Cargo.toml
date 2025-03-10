@@ -1,0 +1,11 @@
+[package]
+name = "query"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+alloy.workspace = true
+
+eyre.workspace = true
+futures-util.workspace = true
+tokio = { workspace = true, features = ["rt-multi-thread", "macros"] }
