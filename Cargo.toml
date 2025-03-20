@@ -4,6 +4,8 @@ members = [
 	"query",
 	"contracts",
 	"fillers",
+	"providers",
+	"wallets",
 ]
 resolver = "3"
 
