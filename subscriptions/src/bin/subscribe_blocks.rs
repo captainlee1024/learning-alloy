@@ -1,6 +1,5 @@
 use alloy::{
     providers::{Provider, ProviderBuilder, WsConnect},
-    rpc::types::BlockTransactionsKind,
     transports::http::reqwest::Url,
 };
 use eyre::Result;

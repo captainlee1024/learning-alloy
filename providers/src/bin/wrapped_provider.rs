@@ -100,7 +100,7 @@ async fn main() -> Result<()> {
     let anvil = Anvil::new().spawn();
 
     let provider = ProviderBuilder::new()
-        .on_builtin(anvil.endpoint().as_str())
+        .connect(anvil.endpoint().as_str())
         .await?;
 
     let signer_pk = "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80"
