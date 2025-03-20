@@ -3,6 +3,7 @@ members = [
 	"subscriptions",
 	"query",
 	"contracts",
+	"fillers",
 ]
 resolver = "3"
 
