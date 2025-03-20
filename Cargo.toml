@@ -14,7 +14,7 @@ version = "0.1.0"
 edition = "2024"
 
 [workspace.dependencies]
-alloy = { version = "0.11", features = [
+alloy = { version = "0.12", features = [
     "eips",
     "full",
     "hyper",
@@ -32,14 +32,11 @@ alloy = { version = "0.11", features = [
     "signer-yubihsm",
 ] }
 
-foundry-fork-db = "0.11"
-
-revm-primitives = "15.0"
-revm = "19.0"
+foundry-fork-db = "0.12"
 
 # async
 futures-util = "0.3"
-tokio = "1.42"
+tokio = "1.44"
 
 # misc
 eyre = "0.6"

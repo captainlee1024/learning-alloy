@@ -34,10 +34,7 @@ async fn main() -> Result<()> {
     println!("通过http 轮训，实现获取最新区块, 这里展示轮训到5个区块后退出");
     println!("http poller start");
     while let Some(block_hash) = stream.next().await {
-        let new_block = http_provider
-            .get_block_by_hash(block_hash, BlockTransactionsKind::Full)
-            .await?
-            .unwrap();
+        let new_block = http_provider.get_block_by_hash(block_hash).await?.unwrap();
         println!(
             "polling new block: block number: {}, block hash: {}",
             new_block.header.number, block_hash

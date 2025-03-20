@@ -15,10 +15,10 @@ async fn main() -> Result<()> {
 
     let payload: ErrorPayload = serde_json::from_str(json)?;
 
-    let Errors::ErrorsErrors::SomeCustomError(value) = payload
-        .as_decoded_error::<Errors::ErrorsErrors>(false)
+    let Errors::SomeCustomError { a } = payload
+        .as_decoded_error::<Errors::SomeCustomError>()
         .unwrap();
-    assert_eq!(value.a, U256::from(1));
+    assert_eq!(a, U256::from(1));
 
     Ok(())
 }
