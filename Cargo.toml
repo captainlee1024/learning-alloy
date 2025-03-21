@@ -6,6 +6,7 @@ members = [
 	"fillers",
 	"providers",
 	"wallets",
+    "mev",
 ]
 resolver = "3"
 
