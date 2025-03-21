@@ -1,9 +1,14 @@
+use alloy::network::EthereumWallet;
+use alloy::node_bindings::Anvil;
+use alloy::providers::WsConnect;
+use alloy::signers::local::PrivateKeySigner;
 use alloy::{
     primitives::U256,
     providers::{Provider, ProviderBuilder},
     sol,
 };
 use eyre::{Result, eyre};
+use futures_util::StreamExt;
 
 sol! {
     #[allow(missing_docs)]
@@ -25,7 +30,50 @@ sol! {
 async fn main() -> Result<()> {
     // Spin up anvil node
     // create provider
-    let provider = ProviderBuilder::new().on_anvil_with_wallet();
+    // let provider = ProviderBuilder::new().on_anvil_with_wallet();
+
+    let anvil = Anvil::new()
+        // .arg("--preserve-historical-states")
+        // .args(["--prune-history", "1024"])
+        .block_time(1)
+        .try_spawn()?;
+    let pk: PrivateKeySigner = anvil.keys()[0].clone().into();
+    let wallet = EthereumWallet::new(pk);
+
+    // Create a WebSocket provider.
+    // let ws = WsConnect::new(anvil.ws_endpoint());
+    // let provider = ProviderBuilder::new().wallet(wallet).on_ws(ws).await?;
+    // use http client
+    let provider = ProviderBuilder::new()
+        .wallet(wallet.clone())
+        .on_http(anvil.endpoint_url());
+
+    let ws_provider = ProviderBuilder::new()
+        .wallet(wallet.clone())
+        .on_ws(WsConnect::new(anvil.ws_endpoint_url()))
+        .await?;
+
+    let provider_to_get_full_tx = ProviderBuilder::new()
+        .wallet(wallet.clone())
+        .on_http(anvil.endpoint_url());
+
+    // FIXME: 为什么不支持直接订阅 full pending tx
+    // anvil ws provider不支持订阅full pending tx, 启动的anvil节点不支持
+    // let full_pen_tx_sub = ws_provider.subscribe_full_pending_transactions().await?;
+    let full_pen_tx_sub = ws_provider.subscribe_pending_transactions().await?;
+    tokio::spawn(async move {
+        let mut stream = full_pen_tx_sub.into_stream();
+        while let Some(tx) = stream.next().await {
+            // println!("New pending tx: {:#?}", tx);
+            println!(
+                "get pending tx by hash: {:#?}",
+                provider_to_get_full_tx
+                    .get_transaction_by_hash(tx)
+                    .await
+                    .unwrap()
+            );
+        }
+    });
 
     // deploy contract
     let contract = Counter::deploy(&provider).await?;
