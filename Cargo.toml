@@ -24,6 +24,7 @@ alloy = { version = "0.12", features = [
     "rpc-client",
     "rpc-types-debug",
     "rpc-types-trace",
+    "rpc-types-mev",
     "signer-aws",
     "signer-gcp",
     "signer-keystore",

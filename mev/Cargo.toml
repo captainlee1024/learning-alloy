@@ -10,5 +10,18 @@ eyre.workspace = true
 futures-util.workspace = true
 tokio = { workspace = true, features = ["rt-multi-thread", "macros"] }
 serde_json.workspace = true
+serde.workspace = true
+
+tower = { version = "0.5", features = ["retry"] }
+http-body-util = "0.1"
+
 
 # 这个项目单独使用的mev库
+
+[lib]
+name = "alloy_flashbots"
+path = "src/lib.rs"
+
+[[bin]]
+name = "send_eth_bundle"
+path = "src/bin/send_bundle_request.rs"
