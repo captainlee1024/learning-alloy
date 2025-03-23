@@ -6,9 +6,7 @@ use alloy::eips::Encodable2718;
 use alloy::network::{EthereumWallet, TransactionBuilder};
 use alloy::primitives::private::serde::{Deserialize, Serialize};
 use alloy::primitives::utils::{eip191_message, parse_units};
-use alloy::primitives::{
-    B256, TxHash, TxKind, U256, address, eip191_hash_message, keccak256,
-};
+use alloy::primitives::{B256, TxHash, TxKind, U256, address, eip191_hash_message, keccak256};
 use alloy::providers::{Provider, ProviderBuilder, WsConnect};
 use alloy::rpc::client::{RpcCall, RpcClient};
 use alloy::rpc::types::mev::{BundleStats, EthBundleHash, EthSendBundle};
@@ -70,7 +68,8 @@ async fn main() -> Result<()> {
     let http_url = "https://ethereum-sepolia-rpc.publicnode.com".parse()?;
     let nft_owner_address = address!("0xD0148b6eB2471F86126Cfe4c4716ab71889131ff");
     // let not_owner_address = address!("0xc213d510fe60552A27F29842729bD28393CBFEe7");
-    let not_owner_address = address!("0x5520B9B4e135F061C72CE780ED3fE215B04Dd407");
+    // 地址错误了，修改为local wallet的地址，需要查询该地址的nonce来构造交易
+    let not_owner_address = address!("0xc213d510fe60552a27f29842729bd28393cbfee7");
     let nft_contract_address = address!("0x24C263EB836bcACab2529Ec30a02262617737025");
     // let enable_presale_selector = "0xa8eac492";
     let enable_presale_selector_without_0x = "a8eac492";
@@ -275,6 +274,7 @@ async fn main() -> Result<()> {
         .into_transaction_request()
         .build(&wallet)
         .await?;
+    // Encode the transaction using EIP-2718 encoding.
     let tx_encoded = tx_envelope.encoded_2718();
     // rlp编码, rlp编码之后才是十六进制字符传，以0x开头
     // flashbots文档示例 0x开头，应该是rlp编码
@@ -286,7 +286,7 @@ async fn main() -> Result<()> {
     //     }
     //   ]
     // }
-    let rlp_hex = hex::encode_prefixed(tx_encoded);
+    let rlp_hex = hex::encode_prefixed(tx_encoded.as_slice());
 
     // let tx_hash = provider.client().request("eth_sendRawTransaction", (rlp_hex,)).await?;
 
@@ -296,11 +296,18 @@ async fn main() -> Result<()> {
 
     // 接收匹配的tx hash
     let target_tx_hash = rx.recv().await.unwrap();
+    // 尝试将我们构造的raw tx 即rlp编码过后的tx直接发送到sepolia网络，看是否能正常执行
+    // 看构造的tx rlp编码是否正常
+    // 这里尝试发送后交易能正常执行，编码正确
+    // let tx_hash = provider.send_raw_transaction(tx_encoded.as_slice()).await?.watch().await?;
+    // println!("Tx Hash: {:?}", tx_hash);
+    // return Ok(());
+
     // 获取目标交易的原始交易
-    // eth_getRawTransactionByHash返回的是 rlp 编码过后的，即 0x......
-    // 但是 alloy 把它解码成了Bytes,
-    // 所以需要 hex::encode_prefixed()
-    // TODO: 确认是否是这样
+    // eth_getRawTransactionByHash返回的是 rlp 编码过后的 并且hex::encode 再拼上0x的
+    // 因为eth在使用json_rpc传输时使用的是字符串,所以转成十六进制字符串了
+    // 所以和eth交互的rlp数据是经过hex之后的，并且添加了0x前缀即 0x......
+    // 所以这里的Bytes应该是 hexed_rlp String直接转换的，这里直接传递给bundle即可
     let target_raw_tx = provider
         .get_raw_transaction_by_hash(target_tx_hash)
         .await?
@@ -331,15 +338,15 @@ async fn main() -> Result<()> {
     let mut bundle = EthSendBundle::default();
     bundle.txs.push(target_raw_tx);
     // FIXME: 这里如何构造符合预期的数据，get_raw_transaction_by_hash获取的数据是刚好符合预期的
-    // bundle.txs.push(tx_encoded.into());
-    bundle.block_number = target_block_number;
+    // bundle.txs.push(rlp_hex.into());
+    bundle.block_number = target_block_number + 2;
     // 5. 发送 bundle
     // let request = flashbots_provider.client().make_request("eth_sendBundle", [bundle]);
     // let resp = flashbots_provider.client().request::<RpcCall<(EthSendBundle,), EthBundleHash>>("eth_sendBundle", (bundle,));
     let bundle_hash = flashbots_provider.send_bundle(bundle).await?;
     println!("Bundle Hash: {:?}", bundle_hash);
 
-    let hexed_block_number = format!("0x{:x}", target_block_number);
+    let hexed_block_number = format!("0x{:x}", target_block_number + 2);
 
     // 6. 查询 bundle 状态
     let param = GetBundleStatsParam {
