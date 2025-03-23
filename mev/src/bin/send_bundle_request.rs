@@ -6,9 +6,7 @@ use alloy::eips::Encodable2718;
 use alloy::network::{EthereumWallet, TransactionBuilder};
 use alloy::primitives::private::serde::{Deserialize, Serialize};
 use alloy::primitives::utils::{eip191_message, parse_units};
-use alloy::primitives::{
-    BlockNumber, TxHash, TxKind, U256, address, eip191_hash_message, keccak256,
-};
+use alloy::primitives::{B256, TxHash, TxKind, U256, address, eip191_hash_message, keccak256};
 use alloy::providers::{Provider, ProviderBuilder, WsConnect};
 use alloy::rpc::client::{RpcCall, RpcClient};
 use alloy::rpc::types::mev::{BundleStats, EthBundleHash, EthSendBundle};
@@ -304,7 +302,7 @@ async fn main() -> Result<()> {
         .get_raw_transaction_by_hash(target_tx_hash)
         .await?
         .unwrap();
-    let hexed_target_raw_tx = hex::encode_prefixed(target_raw_tx);
+    // let hexed_target_raw_tx = hex::encode_prefixed(target_raw_tx);
     let target_block_number = provider.get_block_number().await?;
 
     // 构造一个新的provider with X-Flashbots-Signature
@@ -328,8 +326,9 @@ async fn main() -> Result<()> {
 
     // 4. 构造 bundle
     let mut bundle = EthSendBundle::default();
-    bundle.txs.push(hexed_target_raw_tx.into());
-    bundle.txs.push(rlp_hex.into());
+    bundle.txs.push(target_raw_tx);
+    // FIXME: 这里如何构造符合预期的数据，get_raw_transaction_by_hash获取的数据是刚好符合预期的
+    // bundle.txs.push(tx_encoded.into());
     bundle.block_number = target_block_number;
     // 5. 发送 bundle
     // let request = flashbots_provider.client().make_request("eth_sendBundle", [bundle]);
@@ -337,10 +336,12 @@ async fn main() -> Result<()> {
     let bundle_hash = flashbots_provider.send_bundle(bundle).await?;
     println!("Bundle Hash: {:?}", bundle_hash);
 
+    let hexed_block_number = format!("0x{:x}", target_block_number);
+
     // 6. 查询 bundle 状态
     let param = GetBundleStatsParam {
-        bundle_hash,
-        block_number: target_block_number,
+        bundle_hash: bundle_hash.bundle_hash,
+        block_number: hexed_block_number,
     };
 
     loop {
@@ -386,7 +387,7 @@ trait FlashbotsProviderExt: Provider {
         param: GetBundleStatsParam,
     ) -> RpcCall<(GetBundleStatsParam,), BundleStats> {
         self.client()
-            .request("eth_getBundleStatsV2", (param,))
+            .request("flashbots_getBundleStatsV2", (param,))
             .into()
     }
 }
@@ -394,8 +395,9 @@ trait FlashbotsProviderExt: Provider {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 struct GetBundleStatsParam {
-    bundle_hash: EthBundleHash,
-    block_number: BlockNumber,
+    bundle_hash: B256,
+    // block_number: BlockNumber,
+    block_number: String,
 }
 
 // 为所有 Provider 实现扩展 trait
