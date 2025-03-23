@@ -478,11 +478,20 @@ where
         // let body_bytes = whole_body.iter().collect::<Vec<u8>>();
         let hashed_body = keccak256(whole_body.as_ref());
         println!("Hashed Body: {:?}", hex::encode(hashed_body));
+        // bug fix
+        // 参考: https://github.com/onbjerg/ethers-flashbots/blob/64a0ac980702037dc7499ffdd46cb6bf406442f3/src/relay.rs#L84
+        // 给body签名的步骤是:
+        // 1. hash(body)
+        // 2. hex hashed_body
+        // 3. add 0x prefix to hexed_hashed_body
+        // 4. sign_message(0xhexed_hashed_body) 到这里走eth eip191 sign_message的流程就可以了
+        let hexed_body = hex::encode(hashed_body);
+        let hexed_body_with_perfix = format!("0x{}", hexed_body);
 
         // 生成签名
         let signature = tokio::task::block_in_place(|| {
             tokio::runtime::Handle::current()
-                .block_on(wallet.sign_hash(&eip191_hash_message(hashed_body)))
+                .block_on(wallet.sign_hash(&eip191_hash_message(&hexed_body_with_perfix)))
             //sign_message  ==  self.sign_hash(&eip191_hash_message(message)).await
         })
         .unwrap();
@@ -503,10 +512,12 @@ where
         println!("Header: {}", header_value);
 
         // === 验证一下签名，看是否正常
-        let recover_addr = signature.recover_address_from_msg(hashed_body).unwrap();
+        let recover_addr = signature
+            .recover_address_from_msg(&hexed_body_with_perfix)
+            .unwrap();
         println!("Recover address from msg: {:?}", recover_addr);
         let recover_addr_from_hash = signature
-            .recover_address_from_prehash(&eip191_hash_message(hashed_body))
+            .recover_address_from_prehash(&eip191_hash_message(&hexed_body_with_perfix))
             .unwrap();
         println!(
             "Recover address from final hash: {:?}",
