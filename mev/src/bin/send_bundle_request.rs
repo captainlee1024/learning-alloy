@@ -5,7 +5,7 @@ use alloy::consensus::TxEnvelope;
 use alloy::eips::Encodable2718;
 use alloy::network::{EthereumWallet, TransactionBuilder};
 use alloy::primitives::private::serde::{Deserialize, Serialize};
-use alloy::primitives::utils::parse_units;
+use alloy::primitives::utils::{eip191_message, parse_units};
 use alloy::primitives::{
     BlockNumber, TxHash, TxKind, U256, address, eip191_hash_message, keccak256,
 };
@@ -29,6 +29,7 @@ use alloy::transports::http::{
         rt::TokioExecutor,
     },
 };
+use hyper_tls::HttpsConnector;
 
 // use alloy::rlp::Buf;
 use alloy::{hex, sol};
@@ -224,8 +225,14 @@ async fn main() -> Result<()> {
     //     .on_http(flashbots_url);
 
     // Create a new Hyper client.
+    // let hyper_client =
+    //     Client::builder(TokioExecutor::new()).build_http::<Full<hyper::body::Bytes>>();
+
+    // support tls
+    let https = HttpsConnector::new();
     let hyper_client =
-        Client::builder(TokioExecutor::new()).build_http::<Full<hyper::body::Bytes>>();
+        Client::builder(TokioExecutor::new()).build::<_, Full<hyper::body::Bytes>>(https);
+
     // Use tower::ServiceBuilder to stack layers on top of the Hyper client.
     let service = tower::ServiceBuilder::new()
         .layer(FlashbotsSignatureLayer::new(private_signer))
@@ -466,19 +473,45 @@ where
         })
         .unwrap();
         let whole_body = whole_body_c.to_bytes();
+        println!("Body: {}", String::from_utf8_lossy(&whole_body));
         // let body_bytes = hyper::body::to_bytes(req.body_mut()).await?;
         // let body_bytes = whole_body.iter().collect::<Vec<u8>>();
         let hashed_body = keccak256(whole_body.as_ref());
+        println!("Hashed Body: {:?}", hex::encode(hashed_body));
 
         // 生成签名
         let signature = tokio::task::block_in_place(|| {
             tokio::runtime::Handle::current()
                 .block_on(wallet.sign_hash(&eip191_hash_message(hashed_body)))
+            //sign_message  ==  self.sign_hash(&eip191_hash_message(message)).await
         })
         .unwrap();
+        println!("EIP-191 Message: {:?}", eip191_message(hashed_body));
+        println!(
+            "hexed EIP-191 Message: {:?}",
+            hex::encode(eip191_message(hashed_body))
+        );
+
+        println!("Signature: {:?}", hex::encode(signature.as_bytes()));
         // let signature = rt.block_on(wallet.sign_hash(&eip191_hash_message(hashed_body))).unwrap();
         // let signature = wallet.sign_hash(&eip191_hash_message(hashed_body)).await.unwrap();
-        let header_value = format!("{}:{}", wallet.address(), hex::encode(signature.as_bytes()));
+        let header_value = format!(
+            "{}:0x{}",
+            wallet.address(),
+            hex::encode(signature.as_bytes())
+        );
+        println!("Header: {}", header_value);
+
+        // === 验证一下签名，看是否正常
+        let recover_addr = signature.recover_address_from_msg(hashed_body).unwrap();
+        println!("Recover address from msg: {:?}", recover_addr);
+        let recover_addr_from_hash = signature
+            .recover_address_from_prehash(&eip191_hash_message(hashed_body))
+            .unwrap();
+        println!(
+            "Recover address from final hash: {:?}",
+            recover_addr_from_hash
+        );
 
         // 修改请求头
         cloned_req.headers_mut().insert(
