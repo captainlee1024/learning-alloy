@@ -6,7 +6,9 @@ use alloy::eips::Encodable2718;
 use alloy::network::{EthereumWallet, TransactionBuilder};
 use alloy::primitives::private::serde::{Deserialize, Serialize};
 use alloy::primitives::utils::{eip191_message, parse_units};
-use alloy::primitives::{B256, TxHash, TxKind, U256, address, eip191_hash_message, keccak256};
+use alloy::primitives::{
+    B256, TxHash, TxKind, U256, address, eip191_hash_message, keccak256,
+};
 use alloy::providers::{Provider, ProviderBuilder, WsConnect};
 use alloy::rpc::client::{RpcCall, RpcClient};
 use alloy::rpc::types::mev::{BundleStats, EthBundleHash, EthSendBundle};
@@ -269,6 +271,7 @@ async fn main() -> Result<()> {
         .gas(3000000)
         .max_fee_per_gas(5_000_000_000u128)
         .max_priority_fee_per_gas(2_000_000_000u128)
+        .chain_id(provider.get_chain_id().await?)
         .into_transaction_request()
         .build(&wallet)
         .await?;
@@ -360,7 +363,7 @@ async fn main() -> Result<()> {
             }
             BundleStats::Simulated(stats) => {
                 println!("Bundle status Simulated: {:#?}", stats);
-                return Ok(());
+                // return Ok(());
             }
         }
 
