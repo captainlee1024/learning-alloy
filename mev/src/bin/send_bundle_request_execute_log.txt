@@ -1,0 +1,208 @@
+➜  ~/p*/op*/learn-a*/learning-alloy ( master ❓) source .env
+➜  ~/p*/op*/learn-a*/learning-alloy ( master ❓) cargo run --bin send_eth_bundle > mev/src/bin/send_bundle_request_execute_log.txt
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.57s
+     Running `target/debug/send_eth_bundle`
+
+skip, not NFT owner address: 0xfe2952ad10262c6b466070ca34dbb7fa54b882e3
+skip, not NFT owner address: 0xd0e0bfcdae90f18d5cab36ccd475fa7e60213d9b
+skip, not NFT owner address: 0xcec2a4220276ee2ced0aa635777f953dd21875aa
+skip, not NFT owner address: 0x10dcdd21a1a9faa42739ad0bd002b49003db9c34
+skip, not NFT owner address: 0x3e84f76a360af2fb9e2b33fe015d7bdd3953b260
+skip, not NFT owner address: 0xcf8e773f08a1c1f22d54e46ed5faed692fa52a2e
+skip, not NFT owner address: 0x4db7e4e00401db46c0afb3f93e5e06a3e5966872
+skip, not NFT owner address: 0xd12b34624a16052715a31ba83db1ba32b5bf6c89
+skip, not NFT owner address: 0xdcccaa60ddefaf8f3b71a8ace6b1b304964988bc
+skip, not NFT owner address: 0xafa2597c66049d57b9938a9081b7349647a9d96d
+skip, not NFT owner address: 0x6322c47fee60e15fc1b7ba65f1cfd66201e4c61d
+skip, not NFT owner address: 0x111879a84c99cc079dbdec0f2b1108284ff2db14
+skip, not NFT owner address: 0xc3126bc00fec67cf363d715478b7e92e32329f0c
+skip, not NFT owner address: 0x8af3393df1dbd68c619ea396c9383d5098b1bb8d
+skip, not NFT owner address: 0xfb7208e979c3e18dc198661b5002d885ee97850b
+skip, not NFT owner address: 0xd20ccb1152a69a7f10657e2530def9ea4bf089fc
+skip, not NFT owner address: 0xc6392ad8a14794ea57d237d12017e7295bea2363
+skip, not NFT owner address: 0x713daae39d84bd226b1971f109e2f5dde2a734f6
+skip, not NFT owner address: 0xb8ff877ed78ba520ece21b1de7843a8a57ca47cb
+skip, not NFT owner address: 0x545813c6e09d7a1683588a19cb63e43be5b343a3
+skip, not NFT owner address: 0xe6e8cbb2c7188552076bc1a1545d8200d84cfd8e
+skip, not NFT owner address: 0xf8087e8f3ba5fc4865eda2fcd3c05846982da136
+skip, not NFT owner address: 0xb743d514692bf1dbf185de65b8adb8ba96bda1b3
+skip, not NFT owner address: 0x0859007430f3d2c4104ff24342b17eb69284fd72
+skip, not NFT owner address: 0x67acea5ff5508538f2d676e7b64078536a41f216
+skip, not NFT owner address: 0x8eee59e87f13cbe3eb6e454025408a93edae6612
+skip, not NFT owner address: 0x2f9c071e8506898904a1c3e130f3288ac7881f9b
+skip, not NFT owner address: 0x9c11ebed1b46ca660e67136b5c32761a89f449e7
+skip, not NFT owner address: 0x9479b179b6876f3c60be4179cbe3321a1d119a10
+skip, not NFT owner address: 0x3489fdd567bcab71fa19d2435bf29624ec056c62
+skip, not NFT owner address: 0xf74baf0f87d0df86551cd6ab2f19c59c720b519d
+skip, not NFT owner address: 0x98fe7816dfe4c94b2963e11888629e17cee92839
+skip, not NFT owner address: 0xe1823e316f6376dfb0528b3edd845db83e15c163
+skip, not NFT owner address: 0xdf76ee72c075033d7d97a263c147a553b390ba73
+skip, not NFT owner address: 0x03001ce0b980054462645767250e6a025a5d164e
+skip, not NFT owner address: 0x9279551f12a2d20386768f272554dce620d28b2d
+skip, not NFT owner address: 0x582a3b5b0591ee5392a91dae03509a0b72f8d86b
+skip, not NFT owner address: 0x15095ec8fb1fc9c664b3223459dff43158ace7ad
+skip, not NFT owner address: 0x16e5d2dba8e58e2adc3e47de332b9cb39ee12e82
+skip, not NFT owner address: 0xe5ae09a7dcef6b33087de27256abe4d2990277fa
+skip, not NFT owner address: 0xc49336b79ab56634c05fc380c01791fbe070b3ff
+skip, not NFT owner address: 0x3b67f1a58e51c8b355e2a8117296251565bca077
+skip, not NFT owner address: 0xb43fe52b79f1c26cc7ed5e365792d8a5afec57cc
+skip, not NFT owner address: 0xb59ec7c0b03db8d45dd904bb079b970f8ad91195
+skip, not NFT owner address: 0xd338e1f421cebf5f7c18358ac45e0c6e8679e164
+skip, not NFT owner address: 0x1a0469a7d8af26ea530151ab6404fdd3946c7558
+skip, not NFT owner address: 0xbdd5ddb69cba8afa1ece6b43f331110db795d76c
+skip, not NFT owner address: 0x6e5f677f3a5dc30d140e206d9f008d8a1b1e4de3
+skip, not NFT owner address: 0xe42c439d836708f43f77a65c198a2d7f55b3f3f4
+skip, not NFT owner address: 0xe8e20ff88b39136b73f2e4610383515f369177da
+skip, not NFT owner address: 0x269b8558fa5c86ab2015f4115d5b301c0b65ce7c
+skip, not NFT owner address: 0x25e0a64d77c66148784341bb98ad7927c02c7926
+skip, not NFT owner address: 0x34671b50e452541eb2fe53d7764ef5faf2a94c99
+skip, not NFT owner address: 0xa29ef951bfa6ab6ea1cc5e91e7290cafc26f9cba
+skip, not NFT owner address: 0x76e8cb9b1d04ee9b9d973cd9a0e024245e03c0e0
+skip, not NFT owner address: 0xe93685f3bba03016f02bd1828badd6195988d950
+skip, not NFT owner address: 0xc93b5c9f1afb331b9c5a15aa1b60fc2e650b8cee
+skip, not NFT owner address: 0xc446dfb1808bb0b65600c505f4e296c959770533
+skip, not NFT owner address: 0xd707b15cd388dd5a2d405be29e0ff25d71a27b44
+skip, not NFT owner address: 0x22aa420bc0b508335030c3fe6fb2de8c1af211c1
+match owner address -> 0xd0148b6eb2471f86126cfe4c4716ab71889131ff
+
+=== eip1559 ===
+full pending tx: Signed { tx: TxEip1559 { chain_id: 11155111, nonce: 119, gas_limit: 26181, max_fee_per_gas: 1503472175, max_priority_fee_per_gas: 1500000000, to: Call(0x24c263eb836bcacab2529ec30a02262617737025), value: 0, access_list: AccessList([]), input: 0xa8eac492 }, signature: PrimitiveSignature { y_parity: true, r: 96628693310929528733347811253344688175019662627779070494219988666123446486563, s: 4345577643055070607672961701178807589935146319332525879779813858041885719194 }, hash: OnceLock(0x9c6eee08218664ac1572930ed088158f6c18a7090e204eb585a55db464434d40) }
+current contract address: 0x24c263eb836bcacab2529ec30a02262617737025
+current selector: 0xa8eac492, bytes selector: [168, 234, 196, 146]
+Body: {"method":"eth_sendBundle","params":[{"txs":["0x02f87183aa36a7778459682f0084599d2a2f8266459424c263eb836bcacab2529ec30a022626177370258084a8eac492c001a0d5a1e6fb9e2d94a1264f0804e456d5cdadd59e3a489b614c937c24b46ac98623a0099b82813816af8ca5051708b62c12ad977a9ae8b7813895ef3def834ddd7a9a","0x02f89783aa36a71c83145458836a9110830479999424c263eb836bcacab2529ec30a02262617737025872386f26fc10000a4e6ab1434000000000000000000000000000000000000000000000000000000000000000ac001a07ba8c433ed6e37c508fc7be5d560bf0440340e66d9980d14fa00a5b6489aa35aa00eedcc5f3530e2b839c74556b301d2318e25a0f01281749a1e662609b502c265"],"blockNumber":"0x798ac7"}],"id":0,"jsonrpc":"2.0"}
+Hashed Body: "ad38538997f531faf9a6e18b0faeaf8d5a164e4885fb16dedf0a92b87602958a"
+EIP-191 Message: [25, 69, 116, 104, 101, 114, 101, 117, 109, 32, 83, 105, 103, 110, 101, 100, 32, 77, 101, 115, 115, 97, 103, 101, 58, 10, 51, 50, 173, 56, 83, 137, 151, 245, 49, 250, 249, 166, 225, 139, 15, 174, 175, 141, 90, 22, 78, 72, 133, 251, 22, 222, 223, 10, 146, 184, 118, 2, 149, 138]
+hexed EIP-191 Message: "19457468657265756d205369676e6564204d6573736167653a0a3332ad38538997f531faf9a6e18b0faeaf8d5a164e4885fb16dedf0a92b87602958a"
+Signature: "c1d19ec22305a03e379c072d886be6da3b342526b6f4bba44be3428afeb4c4167b278a568c0a4acadaa91be12737ab68093d8dddc51d8cba40591953fd37617f1b"
+Header: 0xc213d510fe60552A27F29842729bD28393CBFEe7:0xc1d19ec22305a03e379c072d886be6da3b342526b6f4bba44be3428afeb4c4167b278a568c0a4acadaa91be12737ab68093d8dddc51d8cba40591953fd37617f1b
+Recover address from msg: 0xc213d510fe60552a27f29842729bd28393cbfee7
+Recover address from final hash: 0xc213d510fe60552a27f29842729bd28393cbfee7
+Bundle Hash: EthBundleHash { bundle_hash: 0xca8c5acb51a8e5e1fea927cbe114b38ecad1552afdab2ea4b5ca4861ed1096c9 }
+Body: {"method":"flashbots_getBundleStatsV2","params":[{"bundleHash":"0xca8c5acb51a8e5e1fea927cbe114b38ecad1552afdab2ea4b5ca4861ed1096c9","blockNumber":"0x798ac7"}],"id":1,"jsonrpc":"2.0"}
+Hashed Body: "fca1f9c6541b071a629e0e88c1e235e036f6005442d650b32a8337e869fee9f3"
+EIP-191 Message: [25, 69, 116, 104, 101, 114, 101, 117, 109, 32, 83, 105, 103, 110, 101, 100, 32, 77, 101, 115, 115, 97, 103, 101, 58, 10, 51, 50, 252, 161, 249, 198, 84, 27, 7, 26, 98, 158, 14, 136, 193, 226, 53, 224, 54, 246, 0, 84, 66, 214, 80, 179, 42, 131, 55, 232, 105, 254, 233, 243]
+hexed EIP-191 Message: "19457468657265756d205369676e6564204d6573736167653a0a3332fca1f9c6541b071a629e0e88c1e235e036f6005442d650b32a8337e869fee9f3"
+Signature: "31a27761f6492b9c7324412790e260fa826f32f9e194f29ca1101768c8dbded1553ddde2f187663ac4010626679e72abf95db6a6d63c3aba8f6a56a5057512cb1b"
+Header: 0xc213d510fe60552A27F29842729bD28393CBFEe7:0x31a27761f6492b9c7324412790e260fa826f32f9e194f29ca1101768c8dbded1553ddde2f187663ac4010626679e72abf95db6a6d63c3aba8f6a56a5057512cb1b
+Recover address from msg: 0xc213d510fe60552a27f29842729bd28393cbfee7
+Recover address from final hash: 0xc213d510fe60552a27f29842729bd28393cbfee7
+Bundle status Simulated: StatsSimulated {
+    is_high_priority: true,
+    is_simulated: true,
+    simulated_at: "2025-03-23T17:43:36.149Z",
+    received_at: "2025-03-23T17:43:36.14Z",
+    considered_by_builders_at: [],
+    sealed_by_builders_at: [],
+}
+Body: {"method":"flashbots_getBundleStatsV2","params":[{"bundleHash":"0xca8c5acb51a8e5e1fea927cbe114b38ecad1552afdab2ea4b5ca4861ed1096c9","blockNumber":"0x798ac7"}],"id":2,"jsonrpc":"2.0"}
+Hashed Body: "7ea8f9fe8d8d30415ab428cb154b9da56c1cb08aa72d18fe08b14d52c58498ef"
+EIP-191 Message: [25, 69, 116, 104, 101, 114, 101, 117, 109, 32, 83, 105, 103, 110, 101, 100, 32, 77, 101, 115, 115, 97, 103, 101, 58, 10, 51, 50, 126, 168, 249, 254, 141, 141, 48, 65, 90, 180, 40, 203, 21, 75, 157, 165, 108, 28, 176, 138, 167, 45, 24, 254, 8, 177, 77, 82, 197, 132, 152, 239]
+hexed EIP-191 Message: "19457468657265756d205369676e6564204d6573736167653a0a33327ea8f9fe8d8d30415ab428cb154b9da56c1cb08aa72d18fe08b14d52c58498ef"
+Signature: "013dc787bcd02c3d3753c9dd81ab870beec002256d4479371375a1189a4455b020a755a03d98bc3df1ee10f3c79578416e1086c8b05b5781c59d3ce8e49d8ed21b"
+Header: 0xc213d510fe60552A27F29842729bD28393CBFEe7:0x013dc787bcd02c3d3753c9dd81ab870beec002256d4479371375a1189a4455b020a755a03d98bc3df1ee10f3c79578416e1086c8b05b5781c59d3ce8e49d8ed21b
+Recover address from msg: 0xc213d510fe60552a27f29842729bd28393cbfee7
+Recover address from final hash: 0xc213d510fe60552a27f29842729bd28393cbfee7
+Bundle status Simulated: StatsSimulated {
+    is_high_priority: true,
+    is_simulated: true,
+    simulated_at: "2025-03-23T17:43:36.149Z",
+    received_at: "2025-03-23T17:43:36.14Z",
+    considered_by_builders_at: [],
+    sealed_by_builders_at: [],
+}
+Body: {"method":"flashbots_getBundleStatsV2","params":[{"bundleHash":"0xca8c5acb51a8e5e1fea927cbe114b38ecad1552afdab2ea4b5ca4861ed1096c9","blockNumber":"0x798ac7"}],"id":3,"jsonrpc":"2.0"}
+Hashed Body: "84c1ad2fd482fdd61f59cdb4719958475daa9d9fa7b914dac8108084ca14a09a"
+EIP-191 Message: [25, 69, 116, 104, 101, 114, 101, 117, 109, 32, 83, 105, 103, 110, 101, 100, 32, 77, 101, 115, 115, 97, 103, 101, 58, 10, 51, 50, 132, 193, 173, 47, 212, 130, 253, 214, 31, 89, 205, 180, 113, 153, 88, 71, 93, 170, 157, 159, 167, 185, 20, 218, 200, 16, 128, 132, 202, 20, 160, 154]
+hexed EIP-191 Message: "19457468657265756d205369676e6564204d6573736167653a0a333284c1ad2fd482fdd61f59cdb4719958475daa9d9fa7b914dac8108084ca14a09a"
+Signature: "e77134efe6a3ec0e5218664e264e20a81b2d2def4b8765a8b5d8b3c96cbe8950742c182481e0f7b941afd1e7a380e8407c6ca6be6fadacbb9725d619675649861c"
+Header: 0xc213d510fe60552A27F29842729bD28393CBFEe7:0xe77134efe6a3ec0e5218664e264e20a81b2d2def4b8765a8b5d8b3c96cbe8950742c182481e0f7b941afd1e7a380e8407c6ca6be6fadacbb9725d619675649861c
+Recover address from msg: 0xc213d510fe60552a27f29842729bd28393cbfee7
+Recover address from final hash: 0xc213d510fe60552a27f29842729bd28393cbfee7
+Bundle status Simulated: StatsSimulated {
+    is_high_priority: true,
+    is_simulated: true,
+    simulated_at: "2025-03-23T17:43:36.149Z",
+    received_at: "2025-03-23T17:43:36.14Z",
+    considered_by_builders_at: [],
+    sealed_by_builders_at: [],
+}
+Body: {"method":"flashbots_getBundleStatsV2","params":[{"bundleHash":"0xca8c5acb51a8e5e1fea927cbe114b38ecad1552afdab2ea4b5ca4861ed1096c9","blockNumber":"0x798ac7"}],"id":4,"jsonrpc":"2.0"}
+Hashed Body: "0c071c37a85dd802af757874e20fb49268661e7f39897ae5ac21811fe8fbca19"
+EIP-191 Message: [25, 69, 116, 104, 101, 114, 101, 117, 109, 32, 83, 105, 103, 110, 101, 100, 32, 77, 101, 115, 115, 97, 103, 101, 58, 10, 51, 50, 12, 7, 28, 55, 168, 93, 216, 2, 175, 117, 120, 116, 226, 15, 180, 146, 104, 102, 30, 127, 57, 137, 122, 229, 172, 33, 129, 31, 232, 251, 202, 25]
+hexed EIP-191 Message: "19457468657265756d205369676e6564204d6573736167653a0a33320c071c37a85dd802af757874e20fb49268661e7f39897ae5ac21811fe8fbca19"
+Signature: "5d03040f2c3d1fa5c4ec94c8a01ffd2479d367bbaff0202d3e949226675ba9ad2d6f5bbfaefce31c7b2b5a238f6fa60260bb8849acbd499bc7feea0322bc93ff1b"
+Header: 0xc213d510fe60552A27F29842729bD28393CBFEe7:0x5d03040f2c3d1fa5c4ec94c8a01ffd2479d367bbaff0202d3e949226675ba9ad2d6f5bbfaefce31c7b2b5a238f6fa60260bb8849acbd499bc7feea0322bc93ff1b
+Recover address from msg: 0xc213d510fe60552a27f29842729bd28393cbfee7
+Recover address from final hash: 0xc213d510fe60552a27f29842729bd28393cbfee7
+Bundle status Simulated: StatsSimulated {
+    is_high_priority: true,
+    is_simulated: true,
+    simulated_at: "2025-03-23T17:43:36.149Z",
+    received_at: "2025-03-23T17:43:36.14Z",
+    considered_by_builders_at: [],
+    sealed_by_builders_at: [],
+}
+Body: {"method":"flashbots_getBundleStatsV2","params":[{"bundleHash":"0xca8c5acb51a8e5e1fea927cbe114b38ecad1552afdab2ea4b5ca4861ed1096c9","blockNumber":"0x798ac7"}],"id":5,"jsonrpc":"2.0"}
+Hashed Body: "fc8db8c10087db1622aa86a2a7edb0480793458dd41f468c569db2476b49fdb4"
+EIP-191 Message: [25, 69, 116, 104, 101, 114, 101, 117, 109, 32, 83, 105, 103, 110, 101, 100, 32, 77, 101, 115, 115, 97, 103, 101, 58, 10, 51, 50, 252, 141, 184, 193, 0, 135, 219, 22, 34, 170, 134, 162, 167, 237, 176, 72, 7, 147, 69, 141, 212, 31, 70, 140, 86, 157, 178, 71, 107, 73, 253, 180]
+hexed EIP-191 Message: "19457468657265756d205369676e6564204d6573736167653a0a3332fc8db8c10087db1622aa86a2a7edb0480793458dd41f468c569db2476b49fdb4"
+Signature: "a331a32a3edeb7dbc1de9273eb15e7281713ac99d1e5ca9983d079b9c2e1908d0e21f7bd286cc30ee98aacc548d5fb9011a89f87f124ea33170aae2868ed13cd1c"
+Header: 0xc213d510fe60552A27F29842729bD28393CBFEe7:0xa331a32a3edeb7dbc1de9273eb15e7281713ac99d1e5ca9983d079b9c2e1908d0e21f7bd286cc30ee98aacc548d5fb9011a89f87f124ea33170aae2868ed13cd1c
+Recover address from msg: 0xc213d510fe60552a27f29842729bd28393cbfee7
+Recover address from final hash: 0xc213d510fe60552a27f29842729bd28393cbfee7
+Bundle status Simulated: StatsSimulated {
+    is_high_priority: true,
+    is_simulated: true,
+    simulated_at: "2025-03-23T17:43:36.149Z",
+    received_at: "2025-03-23T17:43:36.14Z",
+    considered_by_builders_at: [],
+    sealed_by_builders_at: [],
+}
+Body: {"method":"flashbots_getBundleStatsV2","params":[{"bundleHash":"0xca8c5acb51a8e5e1fea927cbe114b38ecad1552afdab2ea4b5ca4861ed1096c9","blockNumber":"0x798ac7"}],"id":6,"jsonrpc":"2.0"}
+Hashed Body: "4bd6ef41c91886927a2f6bf8fdf2e7740a8ec2a85a0b249b0f4cc98b268beff2"
+EIP-191 Message: [25, 69, 116, 104, 101, 114, 101, 117, 109, 32, 83, 105, 103, 110, 101, 100, 32, 77, 101, 115, 115, 97, 103, 101, 58, 10, 51, 50, 75, 214, 239, 65, 201, 24, 134, 146, 122, 47, 107, 248, 253, 242, 231, 116, 10, 142, 194, 168, 90, 11, 36, 155, 15, 76, 201, 139, 38, 139, 239, 242]
+hexed EIP-191 Message: "19457468657265756d205369676e6564204d6573736167653a0a33324bd6ef41c91886927a2f6bf8fdf2e7740a8ec2a85a0b249b0f4cc98b268beff2"
+Signature: "c43aefdc2da7e1f5434af333de1422040c2172d8f9f0646af5d7e742c9f2efd74b0163f8925a0ad16ac6ba23b3944316dff26baffaff34034686eb770d3d0b031c"
+Header: 0xc213d510fe60552A27F29842729bD28393CBFEe7:0xc43aefdc2da7e1f5434af333de1422040c2172d8f9f0646af5d7e742c9f2efd74b0163f8925a0ad16ac6ba23b3944316dff26baffaff34034686eb770d3d0b031c
+Recover address from msg: 0xc213d510fe60552a27f29842729bd28393cbfee7
+Recover address from final hash: 0xc213d510fe60552a27f29842729bd28393cbfee7
+Bundle status Simulated: StatsSimulated {
+    is_high_priority: true,
+    is_simulated: true,
+    simulated_at: "2025-03-23T17:43:36.149Z",
+    received_at: "2025-03-23T17:43:36.14Z",
+    considered_by_builders_at: [],
+    sealed_by_builders_at: [],
+}
+Body: {"method":"flashbots_getBundleStatsV2","params":[{"bundleHash":"0xca8c5acb51a8e5e1fea927cbe114b38ecad1552afdab2ea4b5ca4861ed1096c9","blockNumber":"0x798ac7"}],"id":7,"jsonrpc":"2.0"}
+Hashed Body: "fb77ef41f93cae1ec88034e12870441f1fb0741b9f87a3b91169dab6fa7b4ed7"
+EIP-191 Message: [25, 69, 116, 104, 101, 114, 101, 117, 109, 32, 83, 105, 103, 110, 101, 100, 32, 77, 101, 115, 115, 97, 103, 101, 58, 10, 51, 50, 251, 119, 239, 65, 249, 60, 174, 30, 200, 128, 52, 225, 40, 112, 68, 31, 31, 176, 116, 27, 159, 135, 163, 185, 17, 105, 218, 182, 250, 123, 78, 215]
+hexed EIP-191 Message: "19457468657265756d205369676e6564204d6573736167653a0a3332fb77ef41f93cae1ec88034e12870441f1fb0741b9f87a3b91169dab6fa7b4ed7"
+Signature: "0001c76e6f738627299b2c20f5e90c523fe2d6327d35132ee6bd0785c40cd39a7d647374ea84a6671c0dc0d5637abf6eefea45f5200340dd2837ce461b4768581b"
+Header: 0xc213d510fe60552A27F29842729bD28393CBFEe7:0x0001c76e6f738627299b2c20f5e90c523fe2d6327d35132ee6bd0785c40cd39a7d647374ea84a6671c0dc0d5637abf6eefea45f5200340dd2837ce461b4768581b
+Recover address from msg: 0xc213d510fe60552a27f29842729bd28393cbfee7
+Recover address from final hash: 0xc213d510fe60552a27f29842729bd28393cbfee7
+Bundle status Simulated: StatsSimulated {
+    is_high_priority: true,
+    is_simulated: true,
+    simulated_at: "2025-03-23T17:43:36.149Z",
+    received_at: "2025-03-23T17:43:36.14Z",
+    considered_by_builders_at: [],
+    sealed_by_builders_at: [],
+}
+Body: {"method":"flashbots_getBundleStatsV2","params":[{"bundleHash":"0xca8c5acb51a8e5e1fea927cbe114b38ecad1552afdab2ea4b5ca4861ed1096c9","blockNumber":"0x798ac7"}],"id":8,"jsonrpc":"2.0"}
+Hashed Body: "807f6eb7f412209d18eceac784f0d23312ab9198a1872fdeee5e3440487d8284"
+EIP-191 Message: [25, 69, 116, 104, 101, 114, 101, 117, 109, 32, 83, 105, 103, 110, 101, 100, 32, 77, 101, 115, 115, 97, 103, 101, 58, 10, 51, 50, 128, 127, 110, 183, 244, 18, 32, 157, 24, 236, 234, 199, 132, 240, 210, 51, 18, 171, 145, 152, 161, 135, 47, 222, 238, 94, 52, 64, 72, 125, 130, 132]
+hexed EIP-191 Message: "19457468657265756d205369676e6564204d6573736167653a0a3332807f6eb7f412209d18eceac784f0d23312ab9198a1872fdeee5e3440487d8284"
+Signature: "feed254dc0111e940f48b04d7cb9fc00bed68c70bd113655a3e285ae1296edb16c383bcb40d37358f0597bb3d3d5fd8206c7579b44f20ac10e19632e78ecfc191c"
+Header: 0xc213d510fe60552A27F29842729bD28393CBFEe7:0xfeed254dc0111e940f48b04d7cb9fc00bed68c70bd113655a3e285ae1296edb16c383bcb40d37358f0597bb3d3d5fd8206c7579b44f20ac10e19632e78ecfc191c
+Recover address from msg: 0xc213d510fe60552a27f29842729bd28393cbfee7
+Recover address from final hash: 0xc213d510fe60552a27f29842729bd28393cbfee7
+Bundle status Simulated: StatsSimulated {
+    is_high_priority: true,
+    is_simulated: true,
+    simulated_at: "2025-03-23T17:43:36.149Z",
+    received_at: "2025-03-23T17:43:36.14Z",
+    considered_by_builders_at: [],
+    sealed_by_builders_at: [],
+}

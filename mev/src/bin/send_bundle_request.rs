@@ -3,10 +3,12 @@
 // use core::slice::SlicePattern;
 use alloy::consensus::TxEnvelope;
 use alloy::eips::Encodable2718;
-use alloy::network::{EthereumWallet, TransactionBuilder};
+use alloy::network::EthereumWallet;
 use alloy::primitives::private::serde::{Deserialize, Serialize};
 use alloy::primitives::utils::{eip191_message, parse_units};
-use alloy::primitives::{B256, TxHash, TxKind, U256, address, eip191_hash_message, keccak256};
+use alloy::primitives::{
+    B256, Bytes, TxHash, TxKind, U256, address, eip191_hash_message, keccak256,
+};
 use alloy::providers::{Provider, ProviderBuilder, WsConnect};
 use alloy::rpc::client::{RpcCall, RpcClient};
 use alloy::rpc::types::mev::{BundleStats, EthBundleHash, EthSendBundle};
@@ -261,21 +263,35 @@ async fn main() -> Result<()> {
 
     // 缺少 ["nonce", "gas_limit", "max_fee_per_gas", "max_priority_fee_per_gas"]
     // 调用into_transaction_request时只填充了to data value, 不会自动从provider查询剩下的字段
-    let nonce = provider.get_transaction_count(not_owner_address).await?;
+    // 不再查询nonce, 使用带recommend_filler的provider自动填充
+    // let nonce = provider.get_transaction_count(not_owner_address).await?;
 
-    let tx_envelope = nft_instance
+    // let tx_envelope = nft_instance
+    //     .presale(U256::from(10))
+    //     .value(u256_amount)
+    //     .nonce(nonce)
+    //     .gas(3000000)
+    //     .max_fee_per_gas(5_000_000_000u128)
+    //     .max_priority_fee_per_gas(2_000_000_000u128)
+    //     .chain_id(provider.get_chain_id().await?)
+    //     .into_transaction_request()
+    //     .build(&wallet)
+    //     .await?;
+
+    // fix成功，使用这种方式构建的交易放到bundle里可以正常执行
+    // 注意，这里交易RLP编码之后直接转成Bytes, 不能进行hex编码
+    let tx_req = nft_instance
         .presale(U256::from(10))
         .value(u256_amount)
-        .nonce(nonce)
-        .gas(3000000)
-        .max_fee_per_gas(5_000_000_000u128)
-        .max_priority_fee_per_gas(2_000_000_000u128)
-        .chain_id(provider.get_chain_id().await?)
-        .into_transaction_request()
-        .build(&wallet)
-        .await?;
+        .into_transaction_request();
+
+    let sendable = provider.fill(tx_req).await?;
+    let envelope = sendable.as_envelope().unwrap();
+    // RLP编码之后的，没有进行hex编码
+    let tx_encoded: Bytes = envelope.encoded_2718().into();
+
     // Encode the transaction using EIP-2718 encoding.
-    let tx_encoded = tx_envelope.encoded_2718();
+    // let tx_encoded = tx_envelope.encoded_2718();
     // rlp编码, rlp编码之后才是十六进制字符传，以0x开头
     // flashbots文档示例 0x开头，应该是rlp编码
     // {
@@ -286,7 +302,7 @@ async fn main() -> Result<()> {
     //     }
     //   ]
     // }
-    let rlp_hex = hex::encode_prefixed(tx_encoded.as_slice());
+    // let rlp_hex = hex::encode_prefixed(tx_encoded.as_slice());
 
     // let tx_hash = provider.client().request("eth_sendRawTransaction", (rlp_hex,)).await?;
 
@@ -338,15 +354,16 @@ async fn main() -> Result<()> {
     let mut bundle = EthSendBundle::default();
     bundle.txs.push(target_raw_tx);
     // FIXME: 这里如何构造符合预期的数据，get_raw_transaction_by_hash获取的数据是刚好符合预期的
-    // bundle.txs.push(rlp_hex.into());
-    bundle.block_number = target_block_number + 2;
+    // 已解决，使用RLP编码后的交易，不能进行hex编码
+    bundle.txs.push(tx_encoded);
+    bundle.block_number = target_block_number + 10;
     // 5. 发送 bundle
     // let request = flashbots_provider.client().make_request("eth_sendBundle", [bundle]);
     // let resp = flashbots_provider.client().request::<RpcCall<(EthSendBundle,), EthBundleHash>>("eth_sendBundle", (bundle,));
     let bundle_hash = flashbots_provider.send_bundle(bundle).await?;
     println!("Bundle Hash: {:?}", bundle_hash);
 
-    let hexed_block_number = format!("0x{:x}", target_block_number + 2);
+    let hexed_block_number = format!("0x{:x}", target_block_number + 10);
 
     // 6. 查询 bundle 状态
     let param = GetBundleStatsParam {
