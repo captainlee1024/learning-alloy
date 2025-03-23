@@ -280,6 +280,9 @@ async fn main() -> Result<()> {
 
     // fix成功，使用这种方式构建的交易放到bundle里可以正常执行
     // 注意，这里交易RLP编码之后直接转成Bytes, 不能进行hex编码
+    // bugfix 参考 alloy-mev:
+    // https://github.com/leruaa/alloy-mev/blob/main/src/eth/reqwest.rs#L34
+    // https://github.com/leruaa/alloy-mev/blob/main/examples/send_to_builders.rs#L44
     let tx_req = nft_instance
         .presale(U256::from(10))
         .value(u256_amount)
